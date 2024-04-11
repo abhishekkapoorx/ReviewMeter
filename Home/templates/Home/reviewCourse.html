@@ -13,7 +13,7 @@ Review the Course
         <p class="block mt-1 font-sans text-base antialiased font-normal leading-relaxed text-gray-700">
             Be first to be a helping hand to others in selecting a course.
         </p>
-        <form class="max-w-screen-lg mt-8 mb-2 w-80 sm:w-96" action="/review-course/{{course.id}}" method="post">
+        <form class="max-w-screen-lg mt-8 mb-2 w-80 sm:w-96" action="/review-course/{{course.id}}" method="post"  enctype="multipart/form-data">
             {% csrf_token %}
             <input type="hidden" name="courseid">
             <div class="flex flex-col gap-6 mb-1">
@@ -44,608 +44,76 @@ Review the Course
 
 
 
+                {% for key, value in questions_dict.items %}
+                    <h6
+                        class=" block -mb-3 font-sans text-lg antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900">
+                        {{ key }}
+                    </h6>
+                    <p class="font-medium text-base text-gray-800">{{value.0}}</p>
 
-                <h6
-                    class=" block -mb-3 font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900">
-                    Overall Rating
-                </h6>
-                <fieldset name="overall_rating" class="flex justify-between text-gray-900">
-                    <legend class="sr-only">Overall Rating</legend>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="or-1" type="radio" name="overall_rating" value="1"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="or-1" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            1
-                        </label>
+                    <div class="relative mb-6">
+                        <label for="{{ value.1 }}" class="sr-only">Labels range</label>
+                        <input id="{{ value.1 }}" type="range" value="3" min="1" max="5" step="1" name="{{ value.1 }}"
+                            class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
+                        <span class="text-sm text-gray-500 dark:text-gray-400 absolute start-0 -bottom-6">1</span>
+                        
+                        <span
+                            class="text-sm text-gray-500 dark:text-gray-400 absolute start-1/2 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">3</span>
+                        
+                        <span class="text-sm text-gray-500 dark:text-gray-400 absolute end-0 -bottom-6">5</span>
                     </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="or-2" type="radio" name="overall_rating" value="2"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="or-2" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            2
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="or-3" type="radio" name="overall_rating" value="3"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="or-3" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            3
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="or-4" type="radio" name="overall_rating" value="4"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="or-4" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            4
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="or-5" type="radio" name="overall_rating" value="5"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="or-5" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            5
-                        </label>
-                    </div>
-                
-                </fieldset>
+                    
 
-
-                <h6
-                    class=" block -mb-3 font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900">
-                    Relevence
-                </h6>
-                <fieldset name="relevence" class="flex justify-between text-gray-900">
-                    <legend class="sr-only">Relevence</legend>
+                    {% comment %}
+                        <fieldset name="{{value.1}}" class="flex justify-between text-gray-900">
+                            <legend class="sr-only">{{key}}</legend>
+                        
+                            <div class="flex items-center mb-4">
+                                <input id="{{value.1}}-1" type="radio" name="{{value.1}}" value="1"
+                                    class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="{{value.1}}-1" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
+                                    1
+                                </label>
+                            </div>
+                        
+                            <div class="flex items-center mb-4">
+                                <input id="{{value.1}}-2" type="radio" name="{{value.1}}" value="2"
+                                    class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="{{value.1}}-2" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
+                                    2
+                                </label>
+                            </div>
+                        
+                            <div class="flex items-center mb-4">
+                                <input id="{{value.1}}-3" type="radio" name="{{value.1}}" value="3"
+                                    class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="{{value.1}}-3" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
+                                    3
+                                </label>
+                            </div>
+                        
+                            <div class="flex items-center mb-4">
+                                <input id="{{value.1}}-4" type="radio" name="{{value.1}}" value="4"
+                                    class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="{{value.1}}-4" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
+                                    4
+                                </label>
+                            </div>
+                        
+                            <div class="flex items-center mb-4">
+                                <input id="{{value.1}}-5" type="radio" name="{{value.1}}" value="5"
+                                    class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="{{value.1}}-5" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
+                                    5
+                                </label>
+                            </div>
+                        
+                        </fieldset>
+                    {% endcomment %}
+                {% endfor %}
                 
-                    <div class="flex items-center mb-4">
-                        <input id="rele-1" type="radio" name="relevence" value="1"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="rele-1" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            1
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="rele-2" type="radio" name="relevence" value="2"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="rele-2" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            2
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="rele-3" type="radio" name="relevence" value="3"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="rele-3" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            3
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="rele-4" type="radio" name="relevence" value="4"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="rele-4" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            4
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="rele-5" type="radio" name="relevence" value="5"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="rele-5" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            5
-                        </label>
-                    </div>
-                
-                </fieldset>
 
 
-                <h6
-                    class=" block -mb-3 font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900">
-                    Content Quality
-                </h6>
-                <fieldset name="content-quality" class="flex justify-between text-gray-900">
-                    <legend class="sr-only">Content Quality</legend>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="contq-1" type="radio" name="content-quality" value="1"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="contq-1" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            1
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="contq-2" type="radio" name="content-quality" value="2"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="contq-2" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            2
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="contq-3" type="radio" name="content-quality" value="3"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="contq-3" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            3
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="contq-4" type="radio" name="content-quality" value="4"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="contq-4" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            4
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="contq-5" type="radio" name="content-quality" value="5"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="contq-5" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            5
-                        </label>
-                    </div>
-                
-                </fieldset>
-
-
-                <h6
-                    class=" block -mb-3 font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900">
-                    Instructor Expertise
-                </h6>
-                <fieldset name="ins-exp" class="flex justify-between text-gray-900">
-                    <legend class="sr-only">Instructor Expertise</legend>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="insexp-1" type="radio" name="ins-exp" value="1"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="insexp-1" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            1
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="insexp-2" type="radio" name="ins-exp" value="2"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="insexp-2" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            2
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="insexp-3" type="radio" name="ins-exp" value="3"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="insexp-3" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            3
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="insexp-4" type="radio" name="ins-exp" value="4"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="insexp-4" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            4
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="insexp-5" type="radio" name="ins-exp" value="5"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="insexp-5" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            5
-                        </label>
-                    </div>
-                
-                </fieldset>
-
-
-                <h6
-                    class=" block -mb-3 font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900">
-                    Engagement
-                </h6>
-                <fieldset name="engagement" class="flex justify-between text-gray-900">
-                    <legend class="sr-only">Engagement</legend>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="engagement-1" type="radio" name="engagement" value="1"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="engagement-1" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            1
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="engagement-2" type="radio" name="engagement" value="2"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="engagement-2" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            2
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="engagement-3" type="radio" name="engagement" value="3"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="engagement-3" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            3
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="engagement-4" type="radio" name="engagement" value="4"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="engagement-4" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            4
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="engagement-5" type="radio" name="engagement" value="5"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="engagement-5" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            5
-                        </label>
-                    </div>
-                
-                </fieldset>
-
-
-                <h6
-                    class=" block -mb-3 font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900">
-                    Clearity of Explanation
-                </h6>
-                <fieldset name="clearity" class="flex justify-between text-gray-900">
-                    <legend class="sr-only">Clearity of Explanation</legend>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="clearity-1" type="radio" name="clearity" value="1"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="clearity-1" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            1
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="clearity-2" type="radio" name="clearity" value="2"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="clearity-2" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            2
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="clearity-3" type="radio" name="clearity" value="3"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="clearity-3" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            3
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="clearity-4" type="radio" name="clearity" value="4"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="clearity-4" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            4
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="clearity-5" type="radio" name="clearity" value="5"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="clearity-5" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            5
-                        </label>
-                    </div>
-                
-                </fieldset>
-
-
-                <h6
-                    class=" block -mb-3 font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900">
-                    Practical Application
-                </h6>
-                <fieldset name="practicalapp" class="flex justify-between text-gray-900">
-                    <legend class="sr-only">Practical Application</legend>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="practicalapp-1" type="radio" name="practicalapp" value="1"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="practicalapp-1" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            1
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="practicalapp-2" type="radio" name="practicalapp" value="2"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="practicalapp-2" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            2
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="practicalapp-3" type="radio" name="practicalapp" value="3"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="practicalapp-3" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            3
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="practicalapp-4" type="radio" name="practicalapp" value="4"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="practicalapp-4" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            4
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="practicalapp-5" type="radio" name="practicalapp" value="5"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="practicalapp-5" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            5
-                        </label>
-                    </div>
-                
-                </fieldset>
-
-
-                <h6
-                    class=" block -mb-3 font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900">
-                    Support Resourse
-                </h6>
-                <fieldset name="supportres" class="flex justify-between text-gray-900">
-                    <legend class="sr-only">Support Resourse</legend>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="supportres-1" type="radio" name="supportres" value="1"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="supportres-1" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            1
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="supportres-2" type="radio" name="supportres" value="2"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="supportres-2" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            2
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="supportres-3" type="radio" name="supportres" value="3"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="supportres-3" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            3
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="supportres-4" type="radio" name="supportres" value="4"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="supportres-4" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            4
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="supportres-5" type="radio" name="supportres" value="5"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="supportres-5" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            5
-                        </label>
-                    </div>
-                
-                </fieldset>
-
-
-                <h6
-                    class=" block -mb-3 font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900">
-                    Feedback and Assessment
-                </h6>
-                <fieldset name="feedback" class="flex justify-between text-gray-900">
-                    <legend class="sr-only">Feedback and Assessment</legend>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="feedback-1" type="radio" name="feedback" value="1"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="feedback-1" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            1
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="feedback-2" type="radio" name="feedback" value="2"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="feedback-2" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            2
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="feedback-3" type="radio" name="feedback" value="3"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="feedback-3" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            3
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="feedback-4" type="radio" name="feedback" value="4"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="feedback-4" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            4
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="feedback-5" type="radio" name="feedback" value="5"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="feedback-5" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            5
-                        </label>
-                    </div>
-                
-                </fieldset>
-
-
-                <h6
-                    class=" block -mb-3 font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900">
-                    Flexibility
-                </h6>
-                <fieldset name="flexibility" class="flex justify-between text-gray-900">
-                    <legend class="sr-only">Flexibility</legend>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="flexibility-1" type="radio" name="flexibility" value="1"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="flexibility-1" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            1
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="flexibility-2" type="radio" name="flexibility" value="2"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="flexibility-2" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            2
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="flexibility-3" type="radio" name="flexibility" value="3"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="flexibility-3" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            3
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="flexibility-4" type="radio" name="flexibility" value="4"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="flexibility-4" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            4
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="flexibility-5" type="radio" name="flexibility" value="5"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="flexibility-5" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            5
-                        </label>
-                    </div>
-                
-                </fieldset>
-
-
-
-
-                <h6
-                    class=" block -mb-3 font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900">
-                    Community and Networking Opportunity
-                </h6>
-                <fieldset name="networking" class="flex justify-between text-gray-900">
-                    <legend class="sr-only">Community and Networking Opportunity</legend>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="networking-1" type="radio" name="networking" value="1"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="networking-1" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            1
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="networking-2" type="radio" name="networking" value="2"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="networking-2" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            2
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="networking-3" type="radio" name="networking" value="3"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="networking-3" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            3
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="networking-4" type="radio" name="networking" value="4"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="networking-4" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            4
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="networking-5" type="radio" name="networking" value="5"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="networking-5" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            5
-                        </label>
-                    </div>
-                
-                </fieldset>
-
-
-
-                <h6
-                    class=" block -mb-3 font-sans text-base antialiased font-semibold leading-relaxed tracking-normal text-blue-gray-900">
-                    Value for Money
-                </h6>
-                <fieldset name="valueformoney" class="flex justify-between text-gray-900">
-                    <legend class="sr-only">Value for Money</legend>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="valueformoney-1" type="radio" name="valueformoney" value="1"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="valueformoney-1" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            1
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="valueformoney-2" type="radio" name="valueformoney" value="2"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="valueformoney-2" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            2
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="valueformoney-3" type="radio" name="valueformoney" value="3"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="valueformoney-3" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            3
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="valueformoney-4" type="radio" name="valueformoney" value="4"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="valueformoney-4" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            4
-                        </label>
-                    </div>
-                
-                    <div class="flex items-center mb-4">
-                        <input id="valueformoney-5" type="radio" name="valueformoney" value="5"
-                            class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus-ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="valueformoney-5" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-900">
-                            5
-                        </label>
-                    </div>
-                
-                </fieldset>
 
                 
                 <h6

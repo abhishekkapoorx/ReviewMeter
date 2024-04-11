@@ -1,0 +1,57 @@
+{% extends 'Home/base.html' %}
+{% block title %}
+    View all Reviews of all Courses
+{% endblock title %}
+
+{% block main %}
+    <div class="max-w-screen-2xl mx-auto mt-10">
+        <h2 class="text-2xl font-bold text-center text-gray-900">View all Reviews of all Courses</h2>
+        {% if courses|length != 0 %}
+            <div class="flex flex-wrap justify-evenly align-middle mt-10">
+                {% for course in courses %}
+                    <div class="relative flex flex-col mt-6 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-96">
+                        <div
+                            class="relative h-56 mx-4 -mt-6 overflow-hidden text-white shadow-lg bg-clip-border rounded-xl object-cover object-center bg-blue-gray-500 shadow-blue-gray-500/40">
+                            <img src="/media/{{course.course_image}}"
+                                alt="card-image" />
+                        </div>
+                        <div class="p-6">
+                            <h5
+                                class="block mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
+                                {{course.course_name}}
+                            </h5>
+                            <p class="block font-sans text-base antialiased font-light leading-relaxed text-inherit">
+                                {{course.course_description|truncatechars:50}}...
+                            </p>
+                        </div>
+                        <div class="p-6 pt-0">
+                            <a  href="/view-reviews/{{course.id}}"
+                                class="m-2 align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
+                                type="button">
+                                View Reviews
+                            </a>
+                            <a  href="/review-course/{{course.id}}"
+                                class="m-2 align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
+                                type="button">
+                                Review Course
+                            </a>
+                        </div>
+                    </div>
+
+                {% endfor %}
+                
+            </div>
+            
+        {% else %}
+            <div role="alert" class="relative flex w-full px-4 py-4 text-base text-gray-900 rounded-lg font-regular bg-gray-900/10 my-5">
+                <div class="mr-12 ">
+                    <span>No such Course Found
+                    <a href="/add-course/" class="font-medium text-gray-900">
+                        Add new the Course
+                    </a>
+                    now.</span>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock main %}

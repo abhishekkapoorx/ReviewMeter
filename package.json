@@ -1,0 +1,17 @@
+{
+  "devDependencies": {
+    "tailwindcss": "^3.4.3"
+  },
+  "dependencies": {
+    "@material-tailwind/html": "^2.2.2"
+  },
+  "name": "reviewmeter",
+  "version": "1.0.0",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "tw": "npx tailwindcss -i ./Home/static/Home/CSS/input.css -o ./Home/static/Home/CSS/output.css --watch"
+  },
+  "author": "abhishekkapoor",
+  "license": "ISC",
+  "description": ""
+}

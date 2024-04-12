@@ -5,7 +5,35 @@ View all Reviews of all Courses
 
 {% block main %}
 <div class="max-w-screen-2xl mx-auto mt-10">
-    <h2 class="text-2xl font-bold text-center text-gray-900">View all Reviews of Course: {{course.course_name}}</h2>
+<h1 class="text-gray-900 font-bold text-4xl my-4 text-center">{{course.course_name}}</h1>
+    <div class="flex flex-wrap justify-between align-middle">
+        <div class="md:w-1/2 sm:w-full p-4 flex flex-col align-middle justify-start mt-10">
+            <img src="/media/{{ course.course_image }}" class="relative h-72 mx-4 -mt-6 overflow-hidden text-white shadow-lg bg-clip-border rounded-xl object-cover object-center bg-blue-gray-500 shadow-blue-gray-500/40">
+            <h2 class="text-gray-900 font-bold text-xl my-4 mt-10">Number of Modules: <span
+                    class="font-light">{{course.no_of_modules}}</span></h2>
+            
+            <h2 class="text-gray-900 font-bold text-xl my-4">Author: <span class="font-light">{{course.author}}</span></h2>
+            
+            <h2 class="text-gray-900 font-bold text-xl my-4">Published Date: <span
+                    class="font-light">{{course.published_date}}</span></h2>
+            
+            <h2 class="text-gray-900 font-bold text-xl my-4">Course Url: <a class="font-light italic text-blue-600"
+                    href="{{course.course_url}}">{{course.course_url}}</a></h2>
+        </div>
+        <div class="md:w-1/2 sm:w-full p-4">
+            <h1 class="text-gray-900 font-bold text-xl my-4 text-justify">Description</h1>
+            {% autoescape off %}
+            <p class="my-2 italic text-justify text-gray-700">{{ course.course_description }}</p>
+            {% endautoescape %}
+
+            
+
+
+
+        </div>
+    </div>
+
+    <h2 class="text-2xl font-bold text-center text-gray-900 mt-10">View all Reviews of Course: {{course.course_name}}</h2>
     {% if reviews|length != 0 %}
     <div class="flex flex-wrap justify-evenly align-middle mt-10">
         {% for review in reviews %}
@@ -44,7 +72,9 @@ View all Reviews of all Courses
             </div>
             <div class="p-0 mb-6">
                 <p class="block font-sans text-base antialiased font-light leading-relaxed text-inherit">
+                    {% autoescape off %}
                     "{{review.review_desc}}"
+                    {% endautoescape %}
                 </p>
                 <p><em class="text-bold text-gray-900">Relevence:</em> {{review.relevence}}</p>
                 <p><em class="text-bold text-gray-900">Content Quality:</em> {{review.content_quality}}</p>

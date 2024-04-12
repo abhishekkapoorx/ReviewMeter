@@ -250,6 +250,30 @@ def reviewCourse(request, courseid):
 
 
 @login_required(login_url="/authenticate/sign-in/")
+def editCourse(request, courseid):
+    if request.method == "POST":
+        course = Course.objects.filter(id=courseid).first()
+        course.course_name = request.POST.get("coursename")
+        course.course_description = request.POST.get("coursedescription")
+        course.no_of_modules = request.POST.get("noofmodules")
+        course.module_content = request.POST.get("modulecontent")
+        course.author = request.POST.get("author")
+        course.published_date = request.POST.get("published")
+        course.course_url = request.POST.get("courseurl")
+        course.course_image = request.FILES.get("courseimage")
+        course.save()
+        messages.success(request, "Course Updated Successfully")
+        return redirect("/")
+    else:
+        if request.user.is_superuser:
+            course = Course.objects.filter(id=courseid).first()
+            return render(request, "Home/editCourse.html", {"course": course})
+        else:
+            messages.error(request, "Not a Administrator")
+            redirect("/")
+
+
+@login_required(login_url="/authenticate/sign-in/")
 def viewReviews(request):
     if request.method == "POST":
         course = request.POST.get("course")
@@ -288,3 +312,8 @@ def viewReviewsByCourse(request, courseid):
     return render(
         request, "Home/viewReviewsByCourse.html", {"reviews": reviews, "course": course}
     )
+
+
+@login_required(login_url="/authenticate/sign-in/")
+def editReview(request, reviewid):
+    pass

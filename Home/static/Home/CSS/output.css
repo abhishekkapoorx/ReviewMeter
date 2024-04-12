@@ -704,6 +704,11 @@ video {
   margin-right: auto;
 }
 
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -874,6 +879,10 @@ video {
   height: 16rem;
 }
 
+.h-72 {
+  height: 18rem;
+}
+
 .h-8 {
   height: 2rem;
 }
@@ -888,6 +897,10 @@ video {
 
 .max-h-\[40px\] {
   max-height: 40px;
+}
+
+.w-1\/2 {
+  width: 50%;
 }
 
 .w-3 {
@@ -934,6 +947,10 @@ video {
   min-width: 200px;
 }
 
+.min-w-\[400px\] {
+  min-width: 400px;
+}
+
 .max-w-\[26rem\] {
   max-width: 26rem;
 }
@@ -952,6 +969,10 @@ video {
 
 .max-w-screen-sm {
   max-width: 540px;
+}
+
+.max-w-full {
+  max-width: 100%;
 }
 
 .border-collapse {
@@ -1222,6 +1243,10 @@ video {
   padding: 0.75rem;
 }
 
+.p-4 {
+  padding: 1rem;
+}
+
 .p-6 {
   padding: 1.5rem;
 }
@@ -1286,6 +1311,14 @@ video {
   text-align: center;
 }
 
+.text-justify {
+  text-align: justify;
+}
+
+.align-top {
+  vertical-align: top;
+}
+
 .align-middle {
   vertical-align: middle;
 }
@@ -1297,6 +1330,11 @@ video {
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
+}
+
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
 }
 
 .text-5xl {
@@ -1366,6 +1404,10 @@ video {
   text-transform: uppercase;
 }
 
+.italic {
+  font-style: italic;
+}
+
 .leading-normal {
   line-height: 1.5;
 }
@@ -1384,6 +1426,11 @@ video {
 
 .tracking-normal {
   letter-spacing: 0em;
+}
+
+.text-blue-600 {
+  --tw-text-opacity: 1;
+  color: rgb(30 136 229 / var(--tw-text-opacity));
 }
 
 .text-blue-gray-700 {
@@ -1433,6 +1480,10 @@ video {
 .text-yellow-700 {
   --tw-text-opacity: 1;
   color: rgb(251 192 45 / var(--tw-text-opacity));
+}
+
+.underline {
+  text-decoration-line: underline;
 }
 
 .antialiased {
@@ -2029,6 +2080,32 @@ video {
 @media (min-width: 540px) {
   .sm\:w-96 {
     width: 24rem;
+  }
+
+  .sm\:w-full {
+    width: 100%;
+  }
+
+  .sm\:max-w-full {
+    max-width: 100%;
+  }
+
+  .sm\:p-4 {
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 720px) {
+  .md\:w-1\/2 {
+    width: 50%;
+  }
+
+  .md\:w-full {
+    width: 100%;
+  }
+
+  .md\:max-w-screen-2xl {
+    max-width: 1320px;
   }
 }
 

@@ -22,7 +22,9 @@ from Home import views
 urlpatterns = [
     path("", views.index, name="index"),
     path("add-course/", views.addCourse, name="addCourse"),
+    path("edit-course/<int:courseid>", views.editCourse, name="editCourse"),
     path("review-course/<int:courseid>", views.reviewCourse, name="reviewCourse"),
     path("view-reviews/", views.viewReviews, name="viewReviews"),
     path("view-reviews/<int:courseid>", views.viewReviewsByCourse, name="viewReviews"),
+    path("edit-reviews/<int:reviewid>", views.editReview, name="editReviews"),
 ]

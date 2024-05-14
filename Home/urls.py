@@ -27,4 +27,8 @@ urlpatterns = [
     path("view-reviews/", views.viewReviews, name="viewReviews"),
     path("view-reviews/<int:courseid>", views.viewReviewsByCourse, name="viewReviews"),
     path("edit-reviews/<int:reviewid>", views.editReview, name="editReviews"),
+    path("compare/", views.compareCourse, name="compareCourse"),
+    path("compare/results/", views.compareResults, name="compareResults"),
+    path("compare/getcourse/", views.compareCourseList, name="compareCourseList"),
+    path("ai-insights/<int:courseid>", views.aiInsights, name="aiInsights"),
 ]

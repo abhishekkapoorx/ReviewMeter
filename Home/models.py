@@ -28,7 +28,7 @@ class CourseAdmin(admin.ModelAdmin):
     list_display = (
         "id",
         "course_name",
-        "course_description",
+        # "course_description",
         "no_of_modules",
         "author",
         "published_date",

@@ -1,0 +1,351 @@
+{% extends 'Home/base.html' %}
+{% block title %}
+Compare Course
+{% endblock title %}
+
+
+{% block headfiles %}
+
+{% load static %}
+<script src="{% static 'Home/JS/compareCourse.js' %}"></script>
+{% endblock headfiles %}
+
+
+{% block main %}
+<div class="md:max-w-screen-2xl sm:max-w-full mx-auto mt-10">
+    <div class="mx-auto mt-10 sm:w-full p-4 md:w-1/2  relative flex flex-col text-gray-700 bg-transparent shadow-none rounded-xl bg-clip-border text-center">
+        <h4 class="block font-sans text-2xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
+            Course Comparison Results
+        </h4>
+        <p class="block mt-1 font-sans text-base antialiased font-normal leading-relaxed text-gray-700">
+            Get clearity of mind by comparing the courses at a glance.
+        </p>
+    </div>
+
+    <table class="table-fixed w-full mt-5 border-separate border-spacing-5">
+        <thead>
+            <tr class="text-2xl text-gray-800 font-sans italic">
+                <th>{{ course1.course_name }}</th>
+                <th>{{ course1.course_name }}</th>
+            </tr>
+        </thead>
+        <tbody class="text-gray-800">
+                <tr>
+                    <td><img src="/media/{{ course1.course_image }}" class="rounded w-full object-cover"></td>
+                    <td><img src="/media/{{ course2.course_image }}" class="rounded w-full object-cover"></td>
+                </tr>
+                <tr>
+                    <td><b class="font-bold text-black">Course Name: </b>{{ course1.course_name }}</td>
+                    <td><b class="font-bold text-black">Course Name: </b>{{ course2.course_name }}</td>
+                </tr>
+                <tr>
+                    <td><b class="font-bold text-black">Course Author: </b>{{ course1.author }}</td>
+                    <td><b class="font-bold text-black">Course Author: </b>{{ course2.author }}</td>
+                </tr>
+                <tr>
+                    <td><b class="font-bold text-black">No of Modules: </b>{{ course1.no_of_modules }}</td>
+                    <td><b class="font-bold text-black">No of Modules: </b>{{ course2.no_of_modules }}</td>
+                </tr>
+                <tr>
+                    <td><b class="font-bold text-black">Published Date: </b>{{ course1.published_date }}</td>
+                    <td><b class="font-bold text-black">Published Date: </b>{{ course2.published_date }}</td>
+                </tr>
+                <tr>
+                    <td><b class="font-bold text-black">Course Description: </b>{% autoescape off %}{{ course1.course_description|truncatechars:700 }}{% endautoescape %} ...</td>
+                    <td><b class="font-bold text-black">Course Description: </b>{% autoescape off %}{{ course2.course_description|truncatechars:700 }}{% endautoescape %} ...</td>
+                </tr>
+
+                <tr class="text-xl text-gray-800 font-sans italic">
+                    <td>Review Section</td>
+                    <td>Review Section</td>
+                </tr>
+                
+                    
+                <tr>
+                    <td class=""><b class="font-bold text-black">Overall Rating: </b>
+                        {% for _ in ''|ljust:reviewcourse1.overall %}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-yellow-700 inline">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        {% endfor %}
+                        {{ reviewcourse1.overall }}
+                    </td>
+                    <td class=""><b class="font-bold text-black">Overall Rating: </b>
+                        {% for _ in ''|ljust:reviewcourse2.overall %}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-yellow-700 inline">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        {% endfor %}
+                        {{ reviewcourse2.overall }}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class=""><b class="font-bold text-black">Relevence Rating: </b>
+                        {% for _ in ''|ljust:reviewcourse1.relevence %}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-yellow-700 inline">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        {% endfor %}
+                        {{ reviewcourse1.relevence }}
+                    </td>
+                    <td class=""><b class="font-bold text-black">relevence Rating: </b>
+                        {% for _ in ''|ljust:reviewcourse2.relevence %}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-yellow-700 inline">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        {% endfor %}
+                        {{ reviewcourse2.relevence }}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class=""><b class="font-bold text-black">Content Quality Rating: </b>
+                        {% for _ in ''|ljust:reviewcourse1.content_quality %}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-yellow-700 inline">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        {% endfor %}
+                        {{ reviewcourse1.content_quality }}
+                    </td>
+                    <td class=""><b class="font-bold text-black">Content Quality Rating: </b>
+                        {% for _ in ''|ljust:reviewcourse2.content_quality %}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-yellow-700 inline">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        {% endfor %}
+                        {{ reviewcourse2.content_quality }}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class=""><b class="font-bold text-black">Instructor Expertise Rating: </b>
+                        {% for _ in ''|ljust:reviewcourse1.instructor_expertise %}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-yellow-700 inline">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        {% endfor %}
+                        {{ reviewcourse1.instructor_expertise }}
+                    </td>
+                    <td class=""><b class="font-bold text-black">Instructor Expertise Rating: </b>
+                        {% for _ in ''|ljust:reviewcourse2.instructor_expertise %}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-yellow-700 inline">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        {% endfor %}
+                        {{ reviewcourse2.instructor_expertise }}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class=""><b class="font-bold text-black">Engagement Rating: </b>
+                        {% for _ in ''|ljust:reviewcourse1.engagement %}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-yellow-700 inline">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        {% endfor %}
+                        {{ reviewcourse1.engagement }}
+                    </td>
+                    <td class=""><b class="font-bold text-black">Engagement Rating: </b>
+                        {% for _ in ''|ljust:reviewcourse2.engagement %}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-yellow-700 inline">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        {% endfor %}
+                        {{ reviewcourse2.engagement }}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class=""><b class="font-bold text-black">Clarity of Explanation Rating: </b>
+                        {% for _ in ''|ljust:reviewcourse1.clarity_of_explanation %}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-yellow-700 inline">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        {% endfor %}
+                        {{ reviewcourse1.clarity_of_explanation }}
+                    </td>
+                    <td class=""><b class="font-bold text-black">Clarity of Explanation Rating: </b>
+                        {% for _ in ''|ljust:reviewcourse2.clarity_of_explanation %}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-yellow-700 inline">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        {% endfor %}
+                        {{ reviewcourse2.clarity_of_explanation }}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class=""><b class="font-bold text-black">Practical Application Rating: </b>
+                        {% for _ in ''|ljust:reviewcourse1.practical_application %}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-yellow-700 inline">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        {% endfor %}
+                        {{ reviewcourse1.practical_application }}
+                    </td>
+                    <td class=""><b class="font-bold text-black">Practical Application Rating: </b>
+                        {% for _ in ''|ljust:reviewcourse2.practical_application %}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-yellow-700 inline">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        {% endfor %}
+                        {{ reviewcourse2.practical_application }}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class=""><b class="font-bold text-black">Support Resources Rating: </b>
+                        {% for _ in ''|ljust:reviewcourse1.support_resources %}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-yellow-700 inline">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        {% endfor %}
+                        {{ reviewcourse1.support_resources }}
+                    </td>
+                    <td class=""><b class="font-bold text-black">Support Resources Rating: </b>
+                        {% for _ in ''|ljust:reviewcourse2.support_resources %}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-yellow-700 inline">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        {% endfor %}
+                        {{ reviewcourse2.support_resources }}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class=""><b class="font-bold text-black">Feedback and Assessment Rating: </b>
+                        {% for _ in ''|ljust:reviewcourse1.feedback_and_assessment %}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-yellow-700 inline">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        {% endfor %}
+                        {{ reviewcourse1.feedback_and_assessment }}
+                    </td>
+                    <td class=""><b class="font-bold text-black">Feedback and Assessment Rating: </b>
+                        {% for _ in ''|ljust:reviewcourse2.feedback_and_assessment %}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-yellow-700 inline">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        {% endfor %}
+                        {{ reviewcourse2.feedback_and_assessment }}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class=""><b class="font-bold text-black">Flexibility Rating: </b>
+                        {% for _ in ''|ljust:reviewcourse1.flexibility %}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-yellow-700 inline">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        {% endfor %}
+                        {{ reviewcourse1.flexibility }}
+                    </td>
+                    <td class=""><b class="font-bold text-black">Flexibility Rating: </b>
+                        {% for _ in ''|ljust:reviewcourse2.flexibility %}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-yellow-700 inline">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        {% endfor %}
+                        {{ reviewcourse2.flexibility }}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class=""><b class="font-bold text-black">Community and Networking Opportunity Rating: </b>
+                        {% for _ in ''|ljust:reviewcourse1.community_and_networking_opportunities %}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-yellow-700 inline">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        {% endfor %}
+                        {{ reviewcourse1.community_and_networking_opportunities }}
+                    </td>
+                    <td class=""><b class="font-bold text-black">Community and Networking Opportunity Rating: </b>
+                        {% for _ in ''|ljust:reviewcourse2.community_and_networking_opportunities %}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-yellow-700 inline">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        {% endfor %}
+                        {{ reviewcourse2.community_and_networking_opportunities }}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class=""><b class="font-bold text-black">Value for Money Rating: </b>
+                        {% for _ in ''|ljust:reviewcourse1.value_for_money %}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-yellow-700 inline">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        {% endfor %}
+                        {{ reviewcourse1.value_for_money }}
+                    </td>
+                    <td class=""><b class="font-bold text-black">Value for Money Rating: </b>
+                        {% for _ in ''|ljust:reviewcourse2.value_for_money %}
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-yellow-700 inline">
+                                <path fill-rule="evenodd"
+                                    d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.007 5.404.433c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.433 2.082-5.006z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        {% endfor %}
+                        {{ reviewcourse2.value_for_money }}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><a href="/view-reviews/{{ course1.id }}" class="rounded-lg font-light bg-gray-900 mt-3 hover:bg-gray-800 text-gray-100 px-3 py-2 transition-all ease-in-out duration-200">Detailed View</a></td>
+                    <td><a href="/view-reviews/{{ course2.id }}" class="rounded-lg font-light bg-gray-900 mt-3 hover:bg-gray-800 text-gray-100 px-3 py-2 transition-all ease-in-out duration-200">Detailed View</a></td>
+                </tr>
+        </tbody>
+    </table>
+    <!-- <div class="flex justify-center max-w-full p-5 overflow-auto">
+        <div class="w-96 p-7 bg-red-900">bgred</div>
+        <div class="w-96 p-7 bg-blue-gray-900">bgblue</div>
+    </div> -->
+</div>
+{% endblock main %}

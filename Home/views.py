@@ -12,15 +12,6 @@ from langchain_community.llms.ollama import Ollama
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
-# from langchain_core.pydantic_v1 import BaseModel, Field
-# from langchain_core.output_parsers import JsonOutputParser
-
-
-# class CourseJsonParser(BaseModel):
-#     review: str = Field(description="AI insights on course after viewing course details and reviews")
-#     why: str = Field(description="Why one should choose a course?")
-#     whynot: str = Field(description="Why one should choose a course?")
-
 
 # Create your views here.
 def index(request):
@@ -397,6 +388,21 @@ def compareResults(request):
                 ),
                 value_for_money=Avg("value_for_money"),
             )
+            if resReview1["overall"] == None:
+                resReview1 = {
+                    "overall":0,
+                    "relevence":0,
+                    "content_quality":0,
+                    "instructor_expertise":0,
+                    "engagement":0,
+                    "clarity_of_explanation":0,
+                    "practical_application":0,
+                    "support_resources":0,
+                    "feedback_and_assessment":0,
+                    "flexibility":0,
+                    "community_and_networking_opportunities":0,
+                    "value_for_money":0,
+                }
             resReview2 = Review.objects.filter(
                 courseid=resCourse2.id, accepted=True
             ).aggregate(
@@ -415,6 +421,21 @@ def compareResults(request):
                 ),
                 value_for_money=Avg("value_for_money"),
             )
+            if resReview2["overall"] == None:
+                resReview2 = {
+                    "overall": 0,
+                    "relevence": 0,
+                    "content_quality": 0,
+                    "instructor_expertise": 0,
+                    "engagement": 0,
+                    "clarity_of_explanation": 0,
+                    "practical_application": 0,
+                    "support_resources": 0,
+                    "feedback_and_assessment": 0,
+                    "flexibility": 0,
+                    "community_and_networking_opportunities": 0,
+                    "value_for_money": 0,
+                }
             return render(
                 request,
                 "Home/compareResults.html",

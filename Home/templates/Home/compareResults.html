@@ -338,8 +338,14 @@ Compare Course
                 </tr>
 
                 <tr>
-                    <td><a href="/view-reviews/{{ course1.id }}" class="rounded-lg font-light bg-gray-900 mt-3 hover:bg-gray-800 text-gray-100 px-3 py-2 transition-all ease-in-out duration-200">Detailed View</a></td>
-                    <td><a href="/view-reviews/{{ course2.id }}" class="rounded-lg font-light bg-gray-900 mt-3 hover:bg-gray-800 text-gray-100 px-3 py-2 transition-all ease-in-out duration-200">Detailed View</a></td>
+                    <td>
+                        <a href="/view-reviews/{{ course1.id }}" class="rounded-lg font-light bg-gray-900 mt-3 hover:bg-gray-800 text-gray-100 px-3 py-2 transition-all ease-in-out duration-200">Detailed View</a>
+                        <a href="/ai-insights/{{ course1.id }}" class="rounded-lg font-light bg-gray-900 mt-3 hover:bg-gray-800 text-gray-100 px-3 py-2 transition-all ease-in-out duration-200">AI Insights✨</a>
+                    </td>
+                    <td>
+                        <a href="/view-reviews/{{ course2.id }}" class="rounded-lg font-light bg-gray-900 mt-3 hover:bg-gray-800 text-gray-100 px-3 py-2 transition-all ease-in-out duration-200 mx-1">Detailed View</a>
+                        <a href="/ai-insights/{{ course.id }}" class="rounded-lg font-light bg-gray-900 mt-3 hover:bg-gray-800 text-gray-100 px-3 py-2 transition-all ease-in-out duration-200 mx-1">AI Insights✨</a>
+                    </td>
                 </tr>
         </tbody>
     </table>
